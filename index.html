@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="200 healthy, kid-friendly morning recipes for busy moms. Get the ESparks digital ebook for ₹299.">
+  <title>200 Healthy Morning Recipes for Kids | ESparks</title>
+
+  <!-- Paddle.js -->
+  <script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
+
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #fffaf5;
+      --card: #ffffff;
+      --text: #24302a;
+      --muted: #68736d;
+      --accent: #e77845;
+      --accent-dark: #c95d2d;
+      --soft: #fff0e7;
+      --border: #eee3db;
+      --success: #3b8b63;
+    }
+
+    body {
+      font-family: Inter, Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a { color: inherit; }
+
+    .container {
+      width: min(1100px, 92%);
+      margin: 0 auto;
+    }
+
+    nav {
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+      background: rgba(255,250,245,.94);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      font-size: 25px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+
+    .nav-btn {
+      border: 0;
+      background: var(--accent);
+      color: white;
+      padding: 11px 18px;
+      border-radius: 999px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .hero {
+      padding: 75px 0 65px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      align-items: center;
+      gap: 65px;
+    }
+
+    .book-placeholder {
+      width: min(100%, 390px);
+      aspect-ratio: 3 / 4;
+      margin: auto;
+      border-radius: 12px;
+      background: linear-gradient(145deg, #f6b17f, #e77845);
+      box-shadow: 0 25px 60px rgba(79, 45, 25, .18);
+      padding: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .book-placeholder::before,
+    .book-placeholder::after {
+      content: "";
+      position: absolute;
+      border: 1px solid rgba(255,255,255,.35);
+      border-radius: 50%;
+    }
+
+    .book-placeholder::before {
+      width: 280px;
+      height: 280px;
+      top: -100px;
+      right: -100px;
+    }
+
+    .book-placeholder::after {
+      width: 220px;
+      height: 220px;
+      bottom: -100px;
+      left: -80px;
+    }
+
+    .book-cover-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .book-cover-content small {
+      display: block;
+      font-weight: 700;
+      letter-spacing: 2px;
+      margin-bottom: 22px;
+      text-transform: uppercase;
+    }
+
+    .book-cover-content h2 {
+      font-size: clamp(28px, 4vw, 43px);
+      line-height: 1.08;
+      margin-bottom: 18px;
+    }
+
+    .book-cover-content p {
+      font-size: 17px;
+      opacity: .95;
+    }
+
+    .eyebrow {
+      color: var(--accent-dark);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1.3px;
+      font-size: 13px;
+      margin-bottom: 15px;
+    }
+
+    h1 {
+      font-size: clamp(42px, 6vw, 68px);
+      line-height: 1.02;
+      letter-spacing: -2.5px;
+      margin-bottom: 22px;
+    }
+
+    .hero-copy > p {
+      color: var(--muted);
+      font-size: 19px;
+      max-width: 620px;
+      margin-bottom: 27px;
+    }
+
+    .price {
+      font-size: 35px;
+      font-weight: 850;
+      margin-bottom: 16px;
+    }
+
+    .buy-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 0;
+      background: var(--accent);
+      color: white;
+      padding: 16px 30px;
+      min-width: 210px;
+      border-radius: 999px;
+      font-size: 17px;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 12px 25px rgba(231,120,69,.24);
+      transition: transform .15s, background .15s;
+    }
+
+    .buy-btn:hover {
+      background: var(--accent-dark);
+      transform: translateY(-2px);
+    }
+
+    .secure {
+      margin-top: 13px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    section {
+      padding: 75px 0;
+    }
+
+    .section-title {
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto 42px;
+    }
+
+    .section-title h2 {
+      font-size: clamp(32px, 4vw, 48px);
+      line-height: 1.08;
+      margin-bottom: 13px;
+    }
+
+    .section-title p {
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .soft-section {
+      background: var(--soft);
+    }
+
+    .problem {
+      max-width: 800px;
+      margin: auto;
+      text-align: center;
+    }
+
+    .problem h2 {
+      font-size: 38px;
+      margin-bottom: 15px;
+    }
+
+    .problem p {
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 27px 22px;
+    }
+
+    .icon {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      background: var(--soft);
+      display: grid;
+      place-items: center;
+      margin-bottom: 17px;
+      font-size: 21px;
+    }
+
+    .card h3 {
+      margin-bottom: 8px;
+      font-size: 19px;
+    }
+
+    .card p {
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .inside-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    .check {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 18px 20px;
+      font-weight: 650;
+    }
+
+    .check span {
+      color: var(--success);
+      margin-right: 9px;
+    }
+
+    .audience {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 13px;
+      max-width: 800px;
+      margin: auto;
+    }
+
+    .audience div {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      padding: 16px 18px;
+    }
+
+    .faq {
+      max-width: 800px;
+      margin: auto;
+    }
+
+    details {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      padding: 18px 20px;
+      margin-bottom: 12px;
+    }
+
+    summary {
+      cursor: pointer;
+      font-weight: 750;
+    }
+
+    details p {
+      color: var(--muted);
+      margin-top: 12px;
+    }
+
+    .final-cta {
+      text-align: center;
+      background: #27332d;
+      color: white;
+    }
+
+    .final-cta p {
+      color: #d6ded9;
+      max-width: 650px;
+      margin: 0 auto 20px;
+    }
+
+    footer {
+      padding: 28px 0;
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .error {
+      display: none;
+      margin-top: 15px;
+      color: #a33838;
+      font-size: 14px;
+    }
+
+    @media (max-width: 850px) {
+      .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+      .hero-copy { text-align: center; }
+      .hero-copy > p { margin-left: auto; margin-right: auto; }
+      .cards { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 560px) {
+      .hero { padding-top: 45px; }
+      h1 { letter-spacing: -1.5px; }
+      .cards, .inside-grid, .audience { grid-template-columns: 1fr; }
+      .book-placeholder { width: 78%; }
+      .nav-btn { display: none; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav>
+    <div class="container nav-inner">
+      <div class="brand">ESparks</div>
+      <button class="nav-btn" onclick="openCheckout()">Get the Ebook</button>
+    </div>
+  </nav>
+
+  <main>
+
+    <section class="hero">
+      <div class="container hero-grid">
+
+        <div class="book-placeholder" aria-label="Ebook cover placeholder">
+          <div class="book-cover-content">
+            <small>ESparks Presents</small>
+            <h2>200 Healthy Morning Recipes for Kids</h2>
+            <p>Easy & delicious breakfast ideas for busy moms</p>
+          </div>
+        </div>
+
+        <div class="hero-copy">
+          <div class="eyebrow">For busy moms</div>
+
+          <h1>Never Wonder What to Make Your Kids for Breakfast Again</h1>
+
+          <p>
+            200 healthy, kid-friendly morning recipes made for busy moms
+            who want easy and delicious breakfast ideas their children
+            will actually enjoy.
+          </p>
+
+          <div class="price">₹299</div>
+
+          <button class="buy-btn" onclick="openCheckout()">
+            BUY NOW
+          </button>
+
+          <div class="secure">
+            Secure checkout powered by Paddle • Digital ebook
+          </div>
+
+          <div id="checkoutError" class="error"></div>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="soft-section">
+      <div class="container problem">
+        <div class="eyebrow">The morning struggle</div>
+        <h2>Tired of asking yourself, “What should I make for the kids this morning?”</h2>
+        <p>
+          Every morning can feel like the same struggle — finding something
+          healthy, tasty, and easy enough to prepare before the day gets busy.
+          This ebook gives moms 200 different morning recipe ideas so breakfast
+          doesn't have to feel repetitive.
+        </p>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="section-title">
+          <div class="eyebrow">Why moms will love it</div>
+          <h2>More ideas. Less morning stress.</h2>
+          <p>A simple collection of breakfast inspiration for busy family mornings.</p>
+        </div>
+
+        <div class="cards">
+          <div class="card">
+            <div class="icon">🍳</div>
+            <h3>200 Recipe Ideas</h3>
+            <p>A huge collection of breakfast ideas to give you more variety throughout the year.</p>
+          </div>
+
+          <div class="card">
+            <div class="icon">❤️</div>
+            <h3>Kid-Friendly</h3>
+            <p>Recipes designed around the kinds of foods and flavors children can enjoy.</p>
+          </div>
+
+          <div class="card">
+            <div class="icon">🥗</div>
+            <h3>Healthy Choices</h3>
+            <p>Make mornings easier while giving your kids nutritious breakfast options.</p>
+          </div>
+
+          <div class="card">
+            <div class="icon">☀️</div>
+            <h3>Less Morning Stress</h3>
+            <p>Stop searching for breakfast ideas every morning. Open the ebook and choose a recipe.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="soft-section">
+      <div class="container">
+        <div class="section-title">
+          <div class="eyebrow">What's included</div>
+          <h2>Everything you need for easier mornings</h2>
+        </div>
+
+        <div class="inside-grid">
+          <div class="check"><span>✓</span> 200 healthy morning recipes</div>
+          <div class="check"><span>✓</span> Kid-friendly breakfast ideas</div>
+          <div class="check"><span>✓</span> Simple recipes for busy mornings</div>
+          <div class="check"><span>✓</span> Variety of nutritious meal options</div>
+          <div class="check"><span>✓</span> Easy ideas to help moms plan breakfast</div>
+          <div class="check"><span>✓</span> Digital ebook</div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="section-title">
+          <div class="eyebrow">Who it's for</div>
+          <h2>Made for moms who want easier mornings</h2>
+        </div>
+
+        <div class="audience">
+          <div>✓ Busy moms</div>
+          <div>✓ Moms with school-going children</div>
+          <div>✓ Parents who struggle to find new breakfast ideas</div>
+          <div>✓ Moms looking for healthier morning meals</div>
+          <div>✓ Families tired of eating the same breakfast every day</div>
+          <div>✓ Parents who want more breakfast variety</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="soft-section">
+      <div class="container faq">
+        <div class="section-title">
+          <div class="eyebrow">Questions</div>
+          <h2>Frequently Asked Questions</h2>
+        </div>
+
+        <details>
+          <summary>Is this a physical book?</summary>
+          <p>No. This is a digital ebook that you can access electronically.</p>
+        </details>
+
+        <details>
+          <summary>How many recipes are included?</summary>
+          <p>The ebook contains 200 healthy morning recipes for kids.</p>
+        </details>
+
+        <details>
+          <summary>Is it suitable for busy moms?</summary>
+          <p>Yes. The ebook is designed to make finding breakfast ideas easier and reduce the daily “what should I make?” problem.</p>
+        </details>
+
+        <details>
+          <summary>How do I purchase it?</summary>
+          <p>Click Buy Now and complete the secure checkout through Paddle.</p>
+        </details>
+
+        <details>
+          <summary>What payment methods can I use?</summary>
+          <p>Paddle will display the payment methods available for your location. Indian customers can be presented with UPI when the transaction qualifies for UPI.</p>
+        </details>
+      </div>
+    </section>
+
+    <section class="final-cta">
+      <div class="container">
+        <div class="section-title">
+          <div class="eyebrow" style="color:#f4a27a;">ESparks</div>
+          <h2>Make Mornings Easier for You and Healthier for Your Kids</h2>
+          <p>Get 200 Healthy Morning Recipes for Kids today.</p>
+          <div class="price">₹299</div>
+          <button class="buy-btn" onclick="openCheckout()">GET THE EBOOK</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      © 2026 ESparks. Digital product.
+    </div>
+  </footer>
+
+  <script>
+    /*
+      PADDLE SANDBOX CONFIGURATION
+
+      These are the credentials you supplied.
+      The client-side token is intended for Paddle.js frontend use.
+      NEVER put a Paddle API key or webhook secret in this file.
+    */
+
+    const PADDLE_CLIENT_TOKEN = "test_bc5901b9b7354c6aed6391308e1";
+    const PADDLE_PRICE_ID = "pri_01m0jctbx8reg3p81c9wttdwpt";
+
+    let paddleReady = false;
+
+    function showError(message) {
+      const el = document.getElementById("checkoutError");
+      el.textContent = message;
+      el.style.display = "block";
+    }
+
+    function clearError() {
+      const el = document.getElementById("checkoutError");
+      el.textContent = "";
+      el.style.display = "none";
+    }
+
+    function openCheckout() {
+      clearError();
+
+      if (!paddleReady) {
+        showError("Paddle is still loading. Please wait a moment and try again.");
+        return;
+      }
+
+      try {
+        Paddle.Checkout.open({
+          items: [
+            {
+              priceId: PADDLE_PRICE_ID,
+              quantity: 1
+            }
+          ]
+        });
+      } catch (error) {
+        console.error("Paddle checkout error:", error);
+        showError("Checkout could not be opened. Please check the Paddle settings and try again.");
+      }
+    }
+
+    window.addEventListener("load", function () {
+      try {
+        Paddle.Environment.set("sandbox");
+
+        Paddle.Initialize({
+          token: PADDLE_CLIENT_TOKEN,
+          eventCallback: function (event) {
+            console.log("Paddle event:", event);
+          }
+        });
+
+        paddleReady = true;
+        console.log("Paddle Sandbox initialized successfully.");
+      } catch (error) {
+        console.error("Paddle initialization error:", error);
+        showError("Paddle could not initialize. Check your Sandbox configuration.");
+      }
+    });
+  </script>
+
+</body>
+</html>
