@@ -572,8 +572,8 @@
       NEVER put a Paddle API key or webhook secret in this file.
     */
 
-    const PADDLE_CLIENT_TOKEN = "test_bc5901b9b7354c6aed6391308e1";
-    const PADDLE_PRICE_ID = "pri_01m0jctbx8reg3p81c9wttdwpt";
+    const PADDLE_CLIENT_TOKEN = "live_da31807fe7f885b9d51687724a4";
+    const PADDLE_PRICE_ID = "pri_01kzmvw6fb0jbzzzbf6cvp4x6s";
 
     let paddleReady = false;
 
@@ -614,7 +614,7 @@
 
     window.addEventListener("load", function () {
       try {
-        Paddle.Environment.set("sandbox");
+        // Live environment: no sandbox override needed.
 
         Paddle.Initialize({
           token: PADDLE_CLIENT_TOKEN,
